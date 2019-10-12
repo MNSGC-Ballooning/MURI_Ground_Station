@@ -19,11 +19,18 @@ void loop() {
     {
       receive_packet[i] = RFD_SERIAL.read();      // Reads bytes one at a time and stores them in a character array.
     }
+
     Serial.println(receive_packet);               // prints whole character array
+
+    for(int k=0; k<sizeof(receive_packet); k++)
+    {
+      receive_packet[k] = '\0';                   // Clear the bytes
+    }
+
   }
 
   if(Serial.available()>0) {
-    delay(10);
+    delay(30);
     int serialBytes = Serial.available();
     read_packet = "";                             // Empty the string that reads to the serial terminal
     for(int j=0; j<serialBytes; j++)
